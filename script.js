@@ -1,12 +1,6 @@
 const library = [];
 const mainContainer = document.querySelector(".main-container")
-// function Book(title, author, pages, read) {
-// this.title = title;
-// this.author = author;
-// this.pages = pages;
-// this.read = read;
-// this.id = crypto.randomUUID();
-// }
+
 
 class Book {
     constructor(title, author, pages, read) {
@@ -16,12 +10,16 @@ class Book {
         this.read = read;
         this.id = crypto.randomUUID();
     }
+    addToLib() {
+        library.push(this);
+    }
 }
 
 
 function addBookToLib(title, author, pages, read) {
     newBook = new Book(title, author, pages, read);
-    library.push(newBook);
+    newBook.addToLib();
+
 }
 
 function renderBooks() {
