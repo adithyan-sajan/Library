@@ -78,21 +78,53 @@ const modal = document.querySelector("#modal-container")
 const form = document.querySelector(".modal");
 form.addEventListener("submit", function (event) {
     event.preventDefault();
-    mainContainer.innerHTML = "";
-    const title = form.elements.title.value;
-    const author = form.elements.author.value;
-    const pages = form.elements.pages.value;
-    const read = form.elements.read.checked;
-    addBookToLib(title, author, pages, read);
-    modal.classList.add("hidden");
-    form.reset();
-    renderBooks();
+
+    const titleInput = document.querySelector("#title");
+    const authorInput = document.querySelector("#author");
+    const pagesInput = document.querySelector("#pages");
+
+    let isEmpty = false;
+
+    if (titleInput.value.trim() === "") {
+        alert("Title cannot be empty.");
+        isEmpty = true;
+    }
+    if (authorInput.value.trim() === "") {
+        alert("Author cannot be empty.");
+        isEmpty = true;
+    }
+    if (pagesInput.value.trim() === "") {
+        alert("Pages cannot be empty.");
+        isEmpty = true;
+    }
+    if (isEmpty) {
+        console.log("One or more fields are empty.");
+    }
+    else {
+        mainContainer.innerHTML = "";
+        console.log("All required fields are filled.");
+        const title = form.elements.title.value;
+        const author = form.elements.author.value;
+        const pages = form.elements.pages.value;
+        const read = form.elements.read.checked;
+        addBookToLib(title, author, pages, read);
+        modal.classList.add("hidden");
+        form.reset();
+        renderBooks();
+    }
 })
 
 const addNewBookButton = document.querySelector(".addNewBook");
 addNewBookButton.addEventListener("click", () => {
     modal.classList.remove("hidden");
 });
+
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#read");
+
+
 console.log(modal)
 addBookToLib("johnson", "book", 300, 0);
 addBookToLib("eming", "fire", 500, 0);
